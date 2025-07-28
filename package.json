@@ -2,7 +2,7 @@
   "name": "subway-quick-report",
   "version": "1.0.0",
   "description": "지하철 호선별 문자 신고 시스템 - 사용자가 지하철 호선을 선택하면 해당 운영기관의 고객센터 번호로 자동 문자 전송이 가능한 웹페이지",
-  "main": "src/index.js",
+  "main": "index.html",
   "keywords": [
     "subway",
     "sms",
@@ -14,13 +14,13 @@
   "author": "sigmaboy",
   "license": "MIT",
   "scripts": {
-    "dev": "live-server src --port=3000 --host=localhost",
-    "build": "npm run lint && npm run format",
-    "lint": "eslint src/**/*.js",
-    "format": "prettier --write src/**/*.{js,html,css}",
+    "dev": "live-server . --port=3000 --host=localhost",
+    "build": "echo 'Static site - no build required'",
+    "lint": "eslint js/**/*.js",
+    "format": "prettier --write **/*.{js,html,css}",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "live-server --port=8080 --host=0.0.0.0",
-    "deploy": "npm run build && gh-pages -d ."
+    "deploy": "gh-pages -d ."
   },
   "devDependencies": {
     "eslint": "^8.56.0",
@@ -32,10 +32,10 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sigmaboy/subway-quick-report.git"
+    "url": "git+https://github.com/xmfhf2769/subway-quick-report.git"
   },
   "bugs": {
-    "url": "https://github.com/sigmaboy/subway-quick-report/issues"
+    "url": "https://github.com/xmfhf2769/subway-quick-report/issues"
   },
-  "homepage": "https://sigmaboy.github.io/subway-quick-report/"
+  "homepage": "https://xmfhf2769.github.io/subway-quick-report/"
 } 
