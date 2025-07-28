@@ -1,0 +1,228 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Project Setup and Repository Configuration",
+        "description": "Initialize project repository with necessary configuration files and folder structure for the Subway Quick Report web application.",
+        "details": "1. Create a new repository on GitHub\n2. Initialize project with package.json using npm init\n3. Configure the following files:\n   - .gitignore (include node_modules, .DS_Store, etc.)\n   - README.md with project description\n   - LICENSE file\n4. Set up folder structure:\n   - /src for source code\n   - /public for static assets\n   - /data for JSON data files\n5. Configure ESLint and Prettier for code quality\n6. Set up basic HTML, CSS, and JavaScript files\n7. Install development dependencies:\n   ```bash\n   npm install --save-dev eslint prettier eslint-config-prettier\n   ```\n8. Configure package.json scripts for development, build, and deployment\n9. Set up HTTPS locally for development using mkcert or similar tool",
+        "testStrategy": "Verify repository structure and configuration files. Ensure all scripts in package.json work correctly. Test the development server startup and basic project structure.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Implement Core HTML Structure and Responsive Layout",
+        "description": "Create the basic HTML structure with responsive design principles to support mobile and tablet optimization.",
+        "details": "1. Create index.html with proper HTML5 doctype and meta tags\n2. Implement responsive viewport meta tag: `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">`\n3. Set up CSS variables for theming (including dark mode support)\n4. Implement responsive grid layout using CSS Grid or Flexbox\n5. Create mobile-first media queries\n6. Set up basic page sections:\n   - Header with title\n   - Main content area for subway line selection\n   - Footer with information\n7. Add meta tags for SEO and social sharing\n8. Include accessibility attributes (ARIA roles, labels)\n9. Implement basic responsive navigation structure\n10. Use Tailwind CSS (v3.3+) for styling:\n    ```bash\n    npm install tailwindcss\n    npx tailwindcss init\n    ```\n11. Configure tailwind.config.js for customization\n12. Set up CSS custom properties for theming",
+        "testStrategy": "Test responsive layout on various screen sizes (mobile, tablet, desktop). Validate HTML using W3C validator. Test accessibility using axe or similar tools. Verify dark mode toggle functionality.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Create Subway Line Data Structure and JSON Database",
+        "description": "Develop the data structure for subway lines, operators, and contact information as specified in the PRD.",
+        "details": "1. Create a data folder in the project\n2. Implement the JSON data structure as specified in the PRD:\n```json\n{\n  \"서울\": {\n    \"1호선\": {\"phone\": \"010-1111-2222\", \"operator\": \"코레일\", \"color\": \"#0052A4\"},\n    \"2호선\": {\"phone\": \"010-2222-3333\", \"operator\": \"서울교통공사\", \"color\": \"#00A84D\"},\n    \"3호선\": {\"phone\": \"010-3333-4444\", \"operator\": \"서울교통공사\", \"color\": \"#EF7C1C\"},\n    \"4호선\": {\"phone\": \"010-4444-5555\", \"operator\": \"서울교통공사\", \"color\": \"#00A4E3\"}\n  },\n  \"부산\": {\n    \"1호선\": {\"phone\": \"010-5555-6666\", \"operator\": \"부산교통공사\", \"color\": \"#F06A00\"},\n    \"2호선\": {\"phone\": \"010-6666-7777\", \"operator\": \"부산교통공사\", \"color\": \"#51BD8A\"}\n  },\n  \"대전\": {\n    \"1호선\": {\"phone\": \"010-7777-8888\", \"operator\": \"대전교통공사\", \"color\": \"#00498B\"}\n  }\n}\n```\n3. Add color codes for each subway line for visual identification\n4. Research and add actual contact numbers for each transit authority\n5. Create a utility function to load and parse the JSON data\n6. Implement error handling for data loading failures\n7. Add validation to ensure data integrity\n8. Create a data service module to abstract data access",
+        "testStrategy": "Validate JSON structure with schema validation. Test data loading functionality. Verify all required fields are present for each subway line. Test error handling for malformed data.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Implement Region Tab UI Component",
+        "description": "Create a tabbed interface to separate subway lines by region (Seoul, Busan, Daejeon, etc.) as specified in the PRD.",
+        "details": "1. Create a TabComponent class or function component\n2. Implement tab switching logic using JavaScript\n3. Style tabs using Tailwind CSS:\n```html\n<div class=\"tab-container\">\n  <button class=\"tab-btn active\" data-region=\"서울\">서울</button>\n  <button class=\"tab-btn\" data-region=\"부산\">부산</button>\n  <button class=\"tab-btn\" data-region=\"대전\">대전</button>\n</div>\n```\n4. Add click event listeners to tab buttons\n5. Implement tab content switching logic\n6. Add smooth transitions between tabs\n7. Ensure tabs are keyboard navigable (tabindex, keyboard events)\n8. Add ARIA attributes for accessibility\n9. Store active tab in localStorage for persistence\n10. Implement responsive design for tabs (horizontal on desktop, dropdown on mobile)\n11. Add visual feedback for active tab state",
+        "testStrategy": "Test tab switching functionality. Verify correct content is displayed for each tab. Test keyboard navigation. Test persistence of selected tab. Test responsive behavior on different screen sizes.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          3
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Design and Implement Subway Line Selection Buttons",
+        "description": "Create visually distinct buttons for each subway line with appropriate styling and data attributes.",
+        "details": "1. Create a component for subway line buttons\n2. Implement button generation based on JSON data\n3. Style buttons with line-specific colors:\n```css\n.line-btn {\n  border-radius: 8px;\n  padding: 12px 16px;\n  margin: 8px;\n  font-weight: bold;\n  color: white;\n  transition: transform 0.2s, box-shadow 0.2s;\n}\n.line-btn:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 4px 8px rgba(0,0,0,0.2);\n}\n```\n4. Add data attributes to buttons as specified in PRD:\n```html\n<button class=\"line-btn\" data-line=\"1\" data-phone=\"010-1111-2222\" style=\"background-color: #0052A4;\">1호선</button>\n```\n5. Implement grid layout for buttons using CSS Grid\n6. Add hover and focus states with animations\n7. Ensure buttons are large enough for touch targets (at least 44×44px)\n8. Add ARIA labels for accessibility\n9. Implement loading animation while data is being fetched\n10. Add haptic feedback for mobile devices using Vibration API",
+        "testStrategy": "Test button rendering for all subway lines. Verify correct data attributes are set. Test button click events. Verify accessibility requirements. Test touch target size on mobile devices.",
+        "priority": "high",
+        "dependencies": [
+          3,
+          4
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Implement SMS URI Schema Generation",
+        "description": "Create functionality to generate SMS URI schemas when a subway line button is clicked, as specified in the PRD.",
+        "details": "1. Implement click event handler for subway line buttons\n2. Generate SMS URI schema using template literals:\n```javascript\nfunction handleLineButtonClick(event) {\n  const button = event.currentTarget;\n  const phone = button.getAttribute('data-phone');\n  const line = button.getAttribute('data-line');\n  const messageBody = `${line}호선 에어컨 고장 신고합니다.`;\n  const encodedBody = encodeURIComponent(messageBody);\n  const smsUri = `sms:${phone}?body=${encodedBody}`;\n  \n  // Check if mobile device before redirecting\n  if (isMobileDevice()) {\n    window.location.href = smsUri;\n  } else {\n    showMobileOnlyMessage();\n  }\n}\n```\n3. Add proper URI encoding for message body\n4. Implement device detection to show appropriate messages on desktop\n5. Add fallback for browsers that don't support SMS URI schema\n6. Implement copy-to-clipboard functionality for desktop users\n7. Add analytics tracking for button clicks (optional)\n8. Implement rate limiting to prevent spam\n9. Add error handling for URI generation",
+        "testStrategy": "Test SMS URI generation with various subway lines. Verify correct phone numbers and message bodies are used. Test on both iOS and Android devices. Test desktop fallback message. Verify URI encoding works correctly with special characters.",
+        "priority": "high",
+        "dependencies": [
+          5
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Implement Device Detection and Mobile-Only Features",
+        "description": "Create functionality to detect device type and show appropriate messages for desktop users, as specified in the PRD.",
+        "details": "1. Implement device detection using User Agent and feature detection:\n```javascript\nfunction isMobileDevice() {\n  const userAgent = navigator.userAgent.toLowerCase();\n  const isMobile = /iphone|ipad|ipod|android|blackberry|windows phone/g.test(userAgent);\n  \n  // Additional feature detection\n  const hasTouchScreen = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);\n  \n  return isMobile && hasTouchScreen;\n}\n```\n2. Create a modal or banner for desktop users:\n```html\n<div id=\"desktop-message\" class=\"hidden\">\n  <div class=\"message-container\">\n    <h3>모바일에서만 이용 가능합니다</h3>\n    <p>이 서비스는 SMS 기능이 필요하여 모바일 기기에서만 사용 가능합니다.</p>\n    <button id=\"close-message\">닫기</button>\n  </div>\n</div>\n```\n3. Implement QR code generation for desktop users to easily access on mobile\n4. Add copy URL button for desktop users\n5. Implement responsive UI adjustments based on device type\n6. Add touch-specific interactions for mobile users\n7. Implement device-specific CSS optimizations",
+        "testStrategy": "Test device detection on various devices and browsers. Verify desktop message appears correctly. Test QR code generation and scanning. Test copy URL functionality. Verify responsive adjustments work correctly.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          6
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Implement Dark Mode Support",
+        "description": "Add dark mode support with toggle functionality and system preference detection.",
+        "details": "1. Set up CSS variables for theming:\n```css\n:root {\n  --bg-color: #ffffff;\n  --text-color: #333333;\n  --card-bg: #f5f5f5;\n  /* other variables */\n}\n\n[data-theme=\"dark\"] {\n  --bg-color: #121212;\n  --text-color: #e0e0e0;\n  --card-bg: #1e1e1e;\n  /* dark theme variables */\n}\n```\n2. Implement theme toggle button:\n```html\n<button id=\"theme-toggle\" aria-label=\"Toggle dark mode\">\n  <svg class=\"sun-icon\"><!-- sun icon --></svg>\n  <svg class=\"moon-icon\"><!-- moon icon --></svg>\n</button>\n```\n3. Add JavaScript for theme switching:\n```javascript\nfunction toggleDarkMode() {\n  const currentTheme = document.documentElement.getAttribute('data-theme');\n  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';\n  document.documentElement.setAttribute('data-theme', newTheme);\n  localStorage.setItem('theme', newTheme);\n}\n\n// Check system preference\nconst prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;\nconst savedTheme = localStorage.getItem('theme');\nconst initialTheme = savedTheme || (prefersDarkMode ? 'dark' : 'light');\ndocument.documentElement.setAttribute('data-theme', initialTheme);\n```\n4. Add smooth transition between themes\n5. Ensure all UI elements have appropriate dark mode styles\n6. Add system preference detection and listener\n7. Store user preference in localStorage\n8. Ensure subway line colors remain visible in dark mode",
+        "testStrategy": "Test theme switching functionality. Verify system preference detection works. Test persistence of theme preference. Verify all UI elements have appropriate contrast in both themes. Test transitions between themes.",
+        "priority": "medium",
+        "dependencies": [
+          2
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Implement PWA Functionality",
+        "description": "Add Progressive Web App features including offline support, installability, and service worker.",
+        "details": "1. Create manifest.json file:\n```json\n{\n  \"name\": \"Subway Quick Report\",\n  \"short_name\": \"SubwayReport\",\n  \"start_url\": \"/\",\n  \"display\": \"standalone\",\n  \"background_color\": \"#ffffff\",\n  \"theme_color\": \"#0052A4\",\n  \"icons\": [\n    {\n      \"src\": \"/icons/icon-192.png\",\n      \"sizes\": \"192x192\",\n      \"type\": \"image/png\"\n    },\n    {\n      \"src\": \"/icons/icon-512.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\"\n    }\n  ]\n}\n```\n2. Implement service worker for offline support:\n```javascript\n// service-worker.js\nconst CACHE_NAME = 'subway-report-v1';\nconst urlsToCache = [\n  '/',\n  '/index.html',\n  '/styles.css',\n  '/app.js',\n  '/data/subway-lines.json',\n  '/icons/icon-192.png',\n  '/icons/icon-512.png'\n];\n\nself.addEventListener('install', event => {\n  event.waitUntil(\n    caches.open(CACHE_NAME)\n      .then(cache => cache.addAll(urlsToCache))\n  );\n});\n\nself.addEventListener('fetch', event => {\n  event.respondWith(\n    caches.match(event.request)\n      .then(response => response || fetch(event.request))\n  );\n});\n```\n3. Register service worker in main JavaScript file\n4. Create app icons in various sizes\n5. Implement install prompt for PWA\n6. Add offline fallback page\n7. Implement background sync for offline reporting\n8. Add cache strategies for different types of assets\n9. Implement periodic cache updates for subway data",
+        "testStrategy": "Test PWA installation on iOS and Android. Verify offline functionality works. Test service worker caching. Verify app icons display correctly. Test background sync functionality. Verify manifest.json is valid.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2,
+          3
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Implement Accessibility Features",
+        "description": "Enhance the application with accessibility features to support screen readers and keyboard navigation.",
+        "details": "1. Add proper semantic HTML elements throughout the application\n2. Implement ARIA attributes for interactive elements:\n```html\n<button class=\"line-btn\" data-line=\"1\" data-phone=\"010-1111-2222\" aria-label=\"1호선 신고하기\">\n  1호선\n</button>\n```\n3. Ensure proper color contrast (minimum 4.5:1 for normal text, 3:1 for large text)\n4. Add skip navigation link for keyboard users\n5. Implement focus management for modals and popups\n6. Add keyboard navigation for all interactive elements\n7. Ensure all form elements have associated labels\n8. Add screen reader announcements for dynamic content changes\n9. Implement focus styles that don't rely solely on color\n10. Test with screen readers (VoiceOver, NVDA, etc.)\n11. Add lang attribute to HTML element\n12. Implement proper heading hierarchy",
+        "testStrategy": "Test with screen readers on multiple platforms. Verify keyboard navigation works for all interactive elements. Test color contrast using automated tools. Verify focus management works correctly. Run accessibility audit using axe or similar tools to ensure WCAG 2.1 AA compliance.",
+        "priority": "high",
+        "dependencies": [
+          2,
+          4,
+          5
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Implement Performance Optimizations",
+        "description": "Optimize the application for fast loading and smooth performance, meeting the 3-second load time requirement.",
+        "details": "1. Implement code splitting for JavaScript files\n2. Optimize and compress images using WebP format\n3. Implement lazy loading for non-critical resources:\n```html\n<img src=\"placeholder.jpg\" data-src=\"actual-image.jpg\" alt=\"Description\" loading=\"lazy\" class=\"lazy-image\">\n```\n4. Minify CSS and JavaScript files\n5. Implement resource hints (preload, prefetch):\n```html\n<link rel=\"preload\" href=\"/fonts/main-font.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>\n```\n6. Add appropriate caching headers\n7. Implement critical CSS inlining\n8. Optimize web fonts loading\n9. Reduce DOM size and complexity\n10. Implement performance monitoring using Web Vitals\n11. Add debouncing for event handlers\n12. Optimize animations for 60fps",
+        "testStrategy": "Measure load time using Lighthouse and WebPageTest. Verify Core Web Vitals metrics (LCP, FID, CLS). Test performance on low-end devices. Verify resource loading optimization. Test caching effectiveness.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          9
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Implement Custom Message Template Feature",
+        "description": "Add functionality for users to customize the SMS message template before sending.",
+        "details": "1. Create a modal or expandable section for message customization\n2. Implement form for message editing:\n```html\n<div class=\"message-template\">\n  <label for=\"message-body\">신고 내용:</label>\n  <textarea id=\"message-body\" rows=\"4\">[X호선] 에어컨 고장 신고합니다. (위치: )</textarea>\n  <button id=\"reset-template\">기본 메시지로 초기화</button>\n  <button id=\"save-template\">저장</button>\n</div>\n```\n3. Add JavaScript to update message template:\n```javascript\nfunction updateMessageTemplate() {\n  const template = document.getElementById('message-body').value;\n  localStorage.setItem('messageTemplate', template);\n}\n\nfunction getMessageTemplate(line) {\n  const savedTemplate = localStorage.getItem('messageTemplate') || '[X호선] 에어컨 고장 신고합니다. (위치: )';\n  return savedTemplate.replace('[X호선]', `[${line}호선]`);\n}\n```\n4. Store custom template in localStorage\n5. Add reset button to restore default template\n6. Implement character counter for SMS length\n7. Add placeholder text for location information\n8. Implement template variables for dynamic content\n9. Add predefined template options for common issues",
+        "testStrategy": "Test template customization and storage. Verify template persistence across sessions. Test character counting functionality. Verify template variables are correctly replaced. Test reset functionality.",
+        "priority": "medium",
+        "dependencies": [
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Implement Analytics and Usage Tracking",
+        "description": "Add anonymous usage tracking to understand user behavior while maintaining privacy.",
+        "details": "1. Implement privacy-focused analytics using Plausible Analytics or similar tool\n2. Track button clicks and page views:\n```javascript\nfunction trackEvent(eventName, properties = {}) {\n  if (typeof plausible !== 'undefined') {\n    plausible(eventName, { props: properties });\n  }\n}\n\n// Usage\ndocument.querySelector('.line-btn').addEventListener('click', function() {\n  const line = this.getAttribute('data-line');\n  const region = document.querySelector('.tab-btn.active').getAttribute('data-region');\n  trackEvent('line_selected', { line, region });\n});\n```\n3. Add privacy policy page explaining data collection\n4. Implement consent mechanism for analytics\n5. Track error events for debugging\n6. Implement feature usage tracking\n7. Add conversion tracking for successful SMS sends\n8. Implement session duration tracking\n9. Add opt-out mechanism for users\n10. Ensure compliance with privacy regulations",
+        "testStrategy": "Verify analytics events are correctly tracked. Test opt-out functionality. Verify privacy policy is accessible. Test consent mechanism. Verify no personal data is collected.",
+        "priority": "low",
+        "dependencies": [
+          6,
+          7
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Implement Deployment Pipeline and HTTPS Configuration",
+        "description": "Set up continuous deployment pipeline and configure HTTPS as required in the PRD.",
+        "details": "1. Set up GitHub Actions for CI/CD:\n```yaml\nname: Deploy\n\non:\n  push:\n    branches: [ main ]\n\njobs:\n  build-and-deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - name: Setup Node.js\n        uses: actions/setup-node@v3\n        with:\n          node-version: '16'\n      - name: Install dependencies\n        run: npm ci\n      - name: Build\n        run: npm run build\n      - name: Deploy to Netlify\n        uses: netlify/actions/cli@master\n        with:\n          args: deploy --dir=dist --prod\n        env:\n          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}\n          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}\n```\n2. Configure custom domain in Netlify/Vercel\n3. Set up HTTPS with automatic certificate renewal\n4. Configure security headers:\n   - Content-Security-Policy\n   - X-Content-Type-Options\n   - X-Frame-Options\n   - Referrer-Policy\n5. Implement redirect from HTTP to HTTPS\n6. Set up environment variables for different deployment environments\n7. Configure caching policies for static assets\n8. Implement automated testing in CI pipeline\n9. Set up monitoring and alerting",
+        "testStrategy": "Verify HTTPS is correctly configured. Test security headers using security scanning tools. Verify automatic deployment works. Test HTTP to HTTPS redirection. Verify caching policies are correctly applied.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          9,
+          11
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Create Documentation and User Guide",
+        "description": "Create comprehensive documentation for the application including user guide and developer documentation.",
+        "details": "1. Create user guide with screenshots and instructions\n2. Add FAQ section addressing common questions\n3. Create developer documentation:\n   - Project structure\n   - Setup instructions\n   - API documentation\n   - Component documentation\n4. Add inline code comments\n5. Create README.md with project overview\n6. Document deployment process\n7. Add contributing guidelines\n8. Create changelog for version tracking\n9. Document browser and device compatibility\n10. Add troubleshooting section\n11. Create privacy policy and terms of service\n12. Document accessibility features and compliance",
+        "testStrategy": "Review documentation for accuracy and completeness. Test setup instructions by following them on a clean environment. Verify all features are documented. Test FAQ answers for accuracy.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-23T05:04:56.845Z",
+      "updated": "2025-07-23T05:22:33.997Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

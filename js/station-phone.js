@@ -1,0 +1,430 @@
+/**
+ * 역별 전화번호 페이지 JavaScript
+ * 검색, 필터링, 전화 연결 기능을 제공합니다.
+ */
+
+/* global StationData */
+
+class StationPhoneManager {
+  constructor() {
+    this.currentRegion = 'all';
+    this.currentStations = [];
+    this.searchTerm = '';
+    
+    // DOM 요소
+    this.elements = {
+      searchInput: null,
+      searchButton: null,
+      filterTabs: null,
+      stationsGrid: null,
+      stationsCount: null,
+      loadingStations: null,
+      noResults: null,
+      themeToggle: null
+    };
+
+    this.init();
+  }
+
+  // 초기화
+  init() {
+    this.bindElements();
+    this.bindEvents();
+    this.initTheme();
+    this.loadStations();
+  }
+
+  // DOM 요소 바인딩
+  bindElements() {
+    this.elements.searchInput = document.getElementById('station-search');
+    this.elements.searchButton = document.getElementById('search-button');
+    this.elements.filterTabs = document.querySelectorAll('.filter-tab');
+    this.elements.stationsGrid = document.getElementById('stations-grid');
+    this.elements.stationsCount = document.getElementById('stations-count');
+    this.elements.loadingStations = document.getElementById('loading-stations');
+    this.elements.noResults = document.getElementById('no-results');
+    this.elements.themeToggle = document.getElementById('theme-toggle');
+  }
+
+  // 이벤트 바인딩
+  bindEvents() {
+    // 검색 이벤트
+    if (this.elements.searchInput) {
+      this.elements.searchInput.addEventListener('input', (e) => {
+        this.searchTerm = e.target.value;
+        this.debounce(this.filterAndDisplayStations.bind(this), 300)();
+      });
+
+      this.elements.searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          this.filterAndDisplayStations();
+        }
+      });
+    }
+
+    if (this.elements.searchButton) {
+      this.elements.searchButton.addEventListener('click', () => {
+        this.filterAndDisplayStations();
+      });
+    }
+
+    // 필터 탭 이벤트
+    this.elements.filterTabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        this.setActiveRegion(e.target.dataset.region);
+      });
+    });
+
+    // 테마 토글 이벤트
+    if (this.elements.themeToggle) {
+      this.elements.themeToggle.addEventListener('click', () => {
+        this.toggleTheme();
+      });
+    }
+
+    // 키보드 접근성
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        this.elements.searchInput?.focus();
+      }
+    });
+  }
+
+  // 테마 초기화
+  initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    this.updateThemeButton(savedTheme);
+  }
+
+  // 테마 토글
+  toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    this.updateThemeButton(newTheme);
+  }
+
+  // 테마 버튼 업데이트
+  updateThemeButton(theme) {
+    if (this.elements.themeToggle) {
+      this.elements.themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      this.elements.themeToggle.setAttribute('aria-label', 
+        theme === 'dark' ? '라이트 모드로 변경' : '다크 모드로 변경'
+      );
+    }
+  }
+
+  // 역 데이터 로드
+  loadStations() {
+    this.showLoading(true);
+    
+    // StationData가 로드될 때까지 대기
+    const waitForData = () => {
+      if (window.StationData && window.StationData.stations.length > 0) {
+        this.filterAndDisplayStations();
+        this.showLoading(false);
+      } else {
+        setTimeout(waitForData, 100);
+      }
+    };
+    
+    waitForData();
+  }
+
+  // 활성 지역 설정
+  setActiveRegion(region) {
+    this.currentRegion = region;
+    
+    // 탭 활성화 상태 변경
+    this.elements.filterTabs.forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.region === region);
+      tab.setAttribute('aria-selected', tab.dataset.region === region);
+    });
+    
+    this.filterAndDisplayStations();
+  }
+
+  // 역 필터링 및 표시
+  filterAndDisplayStations() {
+    if (!window.StationData) {
+      console.warn('StationData가 아직 로드되지 않았습니다.');
+      return;
+    }
+
+    // 지역별 필터링
+    let stations = window.StationData.getStationsByRegion(this.currentRegion);
+    
+    // 검색어 필터링
+    if (this.searchTerm.trim()) {
+      stations = stations.filter(station =>
+        station.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        station.address.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        station.line.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+
+    this.currentStations = stations;
+    this.displayStations(stations);
+    this.updateStationsCount(stations.length);
+  }
+
+  // 역 목록 표시
+  displayStations(stations) {
+    if (!this.elements.stationsGrid) return;
+
+    if (stations.length === 0) {
+      this.showNoResults(true);
+      this.elements.stationsGrid.innerHTML = '';
+      return;
+    }
+
+    this.showNoResults(false);
+    
+    this.elements.stationsGrid.innerHTML = stations.map(station => 
+      this.createStationCard(station)
+    ).join('');
+
+    // 전화 액션 이벤트 바인딩
+    this.bindPhoneActions();
+  }
+
+  // 역 카드 생성
+  createStationCard(station) {
+    const lineDisplayName = this.getLineDisplayName(station.line);
+    
+    return `
+      <div class="station-card" data-station-id="${station.id}">
+        <div class="station-header">
+          <div class="station-info">
+            <div class="station-name">
+              🚇 ${station.name}
+              <span class="station-line" data-line="${station.line}">
+                ${lineDisplayName}
+              </span>
+            </div>
+            <div class="station-address">📍 ${station.address}</div>
+            <div class="station-phone">📞 ${station.phone}</div>
+          </div>
+        </div>
+        <div class="phone-actions">
+          <button class="phone-action call" data-phone="${station.phone}" data-station="${station.name}">
+            📞 전화걸기
+          </button>
+          <button class="phone-action sms" data-phone="${station.phone}" data-station="${station.name}">
+            💬 SMS
+          </button>
+          <button class="phone-action copy" data-phone="${station.phone}" data-station="${station.name}">
+            📋 복사
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // 호선 표시명 가져오기
+  getLineDisplayName(line) {
+    const lineNames = {
+      '1': '1호선',
+      '2': '2호선', 
+      '3': '3호선',
+      '4': '4호선',
+      '5': '5호선',
+      '6': '6호선',
+      '7': '7호선',
+      '8': '8호선',
+      '9': '9호선',
+      'incheon1': '인천1호선',
+      'incheon2': '인천2호선',
+      'busan1': '부산1호선',
+      'busan2': '부산2호선',
+      'busan3': '부산3호선',
+      'busan4': '부산4호선',
+      'daegu1': '대구1호선',
+      'daegu2': '대구2호선',
+      'daegu3': '대구3호선',
+      'daejeon1': '대전1호선',
+      'gwangju1': '광주1호선'
+    };
+    
+    return lineNames[line] || line;
+  }
+
+  // 전화 액션 이벤트 바인딩
+  bindPhoneActions() {
+    // 전화걸기 버튼
+    document.querySelectorAll('.phone-action.call').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const phone = e.target.dataset.phone;
+        const station = e.target.dataset.station;
+        this.makeCall(phone, station);
+      });
+    });
+
+    // SMS 버튼
+    document.querySelectorAll('.phone-action.sms').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const phone = e.target.dataset.phone;
+        const station = e.target.dataset.station;
+        this.sendSMS(phone, station);
+      });
+    });
+
+    // 복사 버튼
+    document.querySelectorAll('.phone-action.copy').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const phone = e.target.dataset.phone;
+        const station = e.target.dataset.station;
+        this.copyPhone(phone, station);
+      });
+    });
+  }
+
+  // 전화걸기
+  makeCall(phone, station) {
+    if (this.isMobile()) {
+      window.location.href = `tel:${phone}`;
+    } else {
+      this.showToast(`${station} (${phone})`, '모바일에서 전화를 걸 수 있습니다');
+    }
+  }
+
+  // SMS 보내기
+  sendSMS(phone, station) {
+    if (this.isMobile()) {
+      const message = `안녕하세요. ${station} 관련 문의사항이 있습니다.`;
+      window.location.href = `sms:${phone}?body=${encodeURIComponent(message)}`;
+    } else {
+      this.showToast(`${station} (${phone})`, 'SMS는 모바일에서만 사용 가능합니다');
+    }
+  }
+
+  // 전화번호 복사
+  async copyPhone(phone, station) {
+    try {
+      await navigator.clipboard.writeText(phone);
+      this.showToast(`${station}`, '전화번호가 복사되었습니다');
+    } catch (err) {
+      console.error('복사 실패:', err);
+      this.showToast(`${station} (${phone})`, '복사에 실패했습니다');
+    }
+  }
+
+  // 모바일 기기 확인
+  isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  // 토스트 메시지 표시
+  showToast(title, message) {
+    // 기존 토스트 제거
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) {
+      existingToast.remove();
+    }
+
+    // 새 토스트 생성
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <div class="toast-content">
+        <strong>${title}</strong>
+        <p>${message}</p>
+      </div>
+    `;
+
+    // 토스트 스타일 추가
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-primary);
+      border: 2px solid var(--primary-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      min-width: 300px;
+      max-width: 90vw;
+      animation: slideUp 0.3s ease-out;
+    `;
+
+    document.body.appendChild(toast);
+
+    // 3초 후 제거
+    setTimeout(() => {
+      toast.style.animation = 'slideDown 0.3s ease-in';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  // 역 개수 업데이트
+  updateStationsCount(count) {
+    if (this.elements.stationsCount) {
+      this.elements.stationsCount.textContent = `총 ${count}개 역`;
+    }
+  }
+
+  // 로딩 상태 표시
+  showLoading(show) {
+    if (this.elements.loadingStations) {
+      this.elements.loadingStations.style.display = show ? 'flex' : 'none';
+    }
+  }
+
+  // 검색 결과 없음 표시
+  showNoResults(show) {
+    if (this.elements.noResults) {
+      this.elements.noResults.style.display = show ? 'block' : 'none';
+    }
+  }
+
+  // 디바운스 유틸리티
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+}
+
+// 토스트 애니메이션 CSS 추가
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideUp {
+    from {
+      transform: translateX(-50%) translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-50%) translateY(100%);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', () => {
+  new StationPhoneManager();
+}); 
