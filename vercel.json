@@ -1,0 +1,17 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "buildCommand": null,
+  "installCommand": null,
+  "devCommand": null,
+  "outputDirectory": ".",
+  "public": true,
+  "github": {
+    "silent": true
+  },
+  "cleanUrls": true
+} 

@@ -1,0 +1,80 @@
+PRD (Product Requirements Document) for "지하철 호선별 문자 신고 시스템"
+프로젝트 명: Subway Quick Report (가칭)
+버전: 1.0
+대상: Cursor AI (컨텍스트 엔지니어링 요청용)
+
+1. 개요
+목적: 사용자가 지하철 호선을 선택하면 해당 운영기관의 고객센터 번호로 자동 문자 전송이 가능한 웹페이지 제작.
+
+핵심 기능: 호선 선택 → 문자 앱 연동 (예: SMS body에 자동 텍스트 삽입).
+
+2. 기능 요구사항 (Features)
+2-1. 호선 선택 버튼 UI
+지역별 탭 분리 (서울/대전/부산 등).
+
+호선 버튼 디자인:
+<button class="line-btn" data-line="1" data-phone="1577-1234">1호선</button>
+<!-- data-line: 호선 번호, data-phone: 해당 기관 번호 -->
+
+2-2. 문자 전송 자동화
+동작 흐름:
+사용자가 3호선 버튼 클릭 → sms:010-1234-5678?body=3호선 에어컨 온도 조절해주세요 자동 생성.
+모바일에서 기본 문자 앱이 열리며, 내용 수정 가능.
+
+예시 코드 (JavaScript):
+document.querySelector('.line-btn').addEventListener('click', function() {
+  const phone = this.getAttribute('data-phone');
+  const line = this.getAttribute('data-line');
+  window.location.href = `sms:${phone}?body=${line}호선 에어컨 고장 신고합니다.`;
+});
+
+2-3. 운영기관별 연락처 DB
+데이터 구조:
+{
+  "서울": {
+    "1호선": {"phone": "010-1111-2222", "operator": "코레일"},
+    "4호선": {"phone": "010-3333-4444", "operator": "서울교통공사"}
+  },
+  "대전": {
+    "1호선": {"phone": "010-5555-6666", "operator": "대전교통공사"}
+  }
+}
+
+3. 기술 요구사항 (Technical Specs)
+호환성: 모바일 최적화 (iOS/Android SMS 앱 연동).
+접근성: tel: 링크 대신 sms: URI 스키마 사용.
+보안: 사용자 휴대폰 번호를 수집하지 않음.
+
+4. 고려사항 (Constraints)
+문자 포맷:
+기본 템플릿: [X호선] 에어컨 고장 신고합니다. (위치: [선택사항]).
+
+예외 처리:
+PC에서 접속 시 "모바일에서만 이용 가능합니다" 안내 표시.
+
+5. 추가 요구사항
+- 반응형 디자인으로 모바일/태블릿 최적화
+- 접근성 고려 (스크린 리더 지원)
+- PWA (Progressive Web App) 기능
+- 다크모드 지원
+- 실시간 지하철 운행 상황 연동 (추후)
+
+6. 기술 스택 
+- Frontend: HTML5, CSS3, JavaScript (ES6+)
+- Framework: Vanilla JS (경량화) 또는 React
+- CSS Framework: Tailwind CSS 또는 Bootstrap
+- 데이터 저장: JSON 파일 또는 Firebase
+- 배포: Vercel, Netlify 또는 GitHub Pages
+
+7. 보안 및 성능 요구사항
+- HTTPS 강제 사용
+- 개인정보 비수집 정책
+- 빠른 로딩 속도 (3초 이내)
+- 오프라인 사용 가능 (Service Worker)
+- 캐싱 전략 구현
+
+8. 테스트 요구사항
+- 크로스 브라우저 테스트
+- 모바일 디바이스 테스트
+- SMS URI 스키마 호환성 테스트
+- 접근성 테스트 (WCAG 2.1 AA 준수) 

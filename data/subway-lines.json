@@ -1,0 +1,290 @@
+{
+  "regions": {
+    "seoul": {
+      "name": "서울특별시",
+      "lines": {
+        "1": {
+          "name": "1호선",
+          "fullName": "수도권 전철 1호선",
+          "operator": "한국철도공사",
+          "phone": "1544-7788",
+          "color": "#0052a4",
+          "icon": "🚇",
+          "description": "의정부·동두천 ↔ 서울역 ↔ 인천·신창"
+        },
+        "2": {
+          "name": "2호선",
+          "fullName": "서울 지하철 2호선",
+          "operator": "서울교통공사",
+          "phone": "1577-1234",
+          "color": "#00a84d",
+          "icon": "🚇",
+          "description": "성수·신도림 순환선 및 신정지선"
+        },
+        "3": {
+          "name": "3호선",
+          "fullName": "서울 지하철 3호선",
+          "operator": "서울교통공사",
+          "phone": "1577-1234",
+          "color": "#ef7c1c",
+          "icon": "🚇",
+          "description": "대화 ↔ 오금"
+        },
+        "4": {
+          "name": "4호선",
+          "fullName": "수도권 전철 4호선",
+          "operator": "서울교통공사",
+          "phone": "1577-1234",
+          "color": "#00a4e3",
+          "icon": "🚇",
+          "description": "당고개 ↔ 오이도·안산"
+        },
+        "5": {
+          "name": "5호선",
+          "fullName": "서울 지하철 5호선",
+          "operator": "서울교통공사",
+          "phone": "1577-1234",
+          "color": "#996cac",
+          "icon": "🚇",
+          "description": "방화 ↔ 상일동·마천"
+        },
+        "6": {
+          "name": "6호선",
+          "fullName": "서울 지하철 6호선",
+          "operator": "서울교통공사",
+          "phone": "1577-1234",
+          "color": "#cd7f00",
+          "icon": "🚇",
+          "description": "응암 ↔ 봉화산"
+        },
+        "7": {
+          "name": "7호선",
+          "fullName": "서울 지하철 7호선",
+          "operator": "서울교통공사",
+          "phone": "1577-1234",
+          "color": "#747f00",
+          "icon": "🚇",
+          "description": "장암 ↔ 부평구청"
+        },
+        "8": {
+          "name": "8호선",
+          "fullName": "서울 지하철 8호선",
+          "operator": "서울교통공사",
+          "phone": "1577-1234",
+          "color": "#e6186c",
+          "icon": "🚇",
+          "description": "암사 ↔ 모란"
+        },
+        "9": {
+          "name": "9호선",
+          "fullName": "서울 지하철 9호선",
+          "operator": "서울9호선운영",
+          "phone": "1599-7781",
+          "color": "#bdb092",
+          "icon": "🚇",
+          "description": "개화 ↔ 중앙보훈병원"
+        },
+        "airport": {
+          "name": "공항철도",
+          "fullName": "인천국제공항철도",
+          "operator": "공항철도",
+          "phone": "1599-7777",
+          "color": "#0090d2",
+          "icon": "✈️",
+          "description": "서울역 ↔ 인천국제공항"
+        },
+        "bundang": {
+          "name": "신분당선",
+          "fullName": "신분당선",
+          "operator": "네오트랜스",
+          "phone": "1588-7275",
+          "color": "#d4003b",
+          "icon": "🚄",
+          "description": "강남 ↔ 광교"
+        },
+        "gyeongui": {
+          "name": "경의중앙선",
+          "fullName": "수도권 전철 경의중앙선",
+          "operator": "한국철도공사",
+          "phone": "1544-7788",
+          "color": "#77c4a3",
+          "icon": "🚆",
+          "description": "문산 ↔ 용문"
+        },
+        "uisinseol": {
+          "name": "우이신설선",
+          "fullName": "서울 경전철 우이신설선",
+          "operator": "서울교통공사",
+          "phone": "1577-1234",
+          "color": "#b0ce18",
+          "icon": "🚋",
+          "description": "북한산우이 ↔ 신설동"
+        },
+        "suinbundang": {
+          "name": "수인분당선",
+          "fullName": "수도권 전철 수인분당선",
+          "operator": "한국철도공사",
+          "phone": "1544-7788",
+          "color": "#fabe00",
+          "icon": "🚆",
+          "description": "인천 ↔ 수원 ↔ 왕십리"
+        }
+      }
+    },
+    "busan": {
+      "name": "부산광역시",
+      "lines": {
+        "1": {
+          "name": "1호선",
+          "fullName": "부산 도시철도 1호선",
+          "operator": "부산교통공사",
+          "phone": "1577-0012",
+          "color": "#f06a00",
+          "icon": "🚇",
+          "description": "노포동 ↔ 다대포해수욕장"
+        },
+        "2": {
+          "name": "2호선",
+          "fullName": "부산 도시철도 2호선",
+          "operator": "부산교통공사",
+          "phone": "1577-0012",
+          "color": "#81c562",
+          "icon": "🚇",
+          "description": "장산 ↔ 양산"
+        },
+        "3": {
+          "name": "3호선",
+          "fullName": "부산 도시철도 3호선",
+          "operator": "부산교통공사",
+          "phone": "1577-0012",
+          "color": "#fabe00",
+          "icon": "🚇",
+          "description": "수영 ↔ 대저"
+        },
+        "4": {
+          "name": "4호선",
+          "fullName": "부산 도시철도 4호선",
+          "operator": "부산교통공사",
+          "phone": "1577-0012",
+          "color": "#1e90ff",
+          "icon": "🚇",
+          "description": "미남 ↔ 안평"
+        },
+        "donghae": {
+          "name": "동해선",
+          "fullName": "동해선 광역전철",
+          "operator": "한국철도공사",
+          "phone": "1544-7788",
+          "color": "#003da5",
+          "icon": "🚆",
+          "description": "부전 ↔ 일광"
+        },
+        "gimhae": {
+          "name": "김해경전철",
+          "fullName": "부산김해경전철",
+          "operator": "부산김해경전철",
+          "phone": "1577-5788",
+          "color": "#875cac",
+          "icon": "🚋",
+          "description": "사상 ↔ 가야대"
+        }
+      }
+    },
+    "daejeon": {
+      "name": "대전광역시",
+      "lines": {
+        "1": {
+          "name": "1호선",
+          "fullName": "대전 도시철도 1호선",
+          "operator": "대전교통공사",
+          "phone": "042-634-9000",
+          "color": "#007448",
+          "icon": "🚇",
+          "description": "판암 ↔ 반석"
+        }
+      }
+    },
+    "daegu": {
+      "name": "대구광역시",
+      "lines": {
+        "1": {
+          "name": "1호선",
+          "fullName": "대구 도시철도 1호선",
+          "operator": "대구도시철도공사",
+          "phone": "1577-1500",
+          "color": "#d93f00",
+          "icon": "🚇",
+          "description": "설화명곡 ↔ 안심"
+        },
+        "2": {
+          "name": "2호선",
+          "fullName": "대구 도시철도 2호선",
+          "operator": "대구도시철도공사",
+          "phone": "1577-1500",
+          "color": "#00a84d",
+          "icon": "🚇",
+          "description": "문양 ↔ 영남대"
+        },
+        "3": {
+          "name": "3호선",
+          "fullName": "대구 도시철도 3호선",
+          "operator": "대구도시철도공사",
+          "phone": "1577-1500",
+          "color": "#ffb100",
+          "icon": "🚋",
+          "description": "칠곡경대병원 ↔ 용지"
+        }
+      }
+    },
+    "gwangju": {
+      "name": "광주광역시",
+      "lines": {
+        "1": {
+          "name": "1호선",
+          "fullName": "광주 도시철도 1호선",
+          "operator": "광주도시철도공사",
+          "phone": "062-604-8000",
+          "color": "#009639",
+          "icon": "🚇",
+          "description": "녹동 ↔ 평동"
+        }
+      }
+    },
+    "incheon": {
+      "name": "인천광역시",
+      "lines": {
+        "1": {
+          "name": "인천1호선",
+          "fullName": "인천 도시철도 1호선",
+          "operator": "인천교통공사",
+          "phone": "1577-1122",
+          "color": "#759cce",
+          "icon": "🚇",
+          "description": "계양 ↔ 국제업무지구"
+        },
+        "2": {
+          "name": "인천2호선",
+          "fullName": "인천 도시철도 2호선",
+          "operator": "인천교통공사",
+          "phone": "1577-1122",
+          "color": "#f5a251",
+          "icon": "🚇",
+          "description": "검단오류 ↔ 운연"
+        }
+      }
+    }
+  },
+  "messageTemplates": {
+    "default": "{date} {line} [{direction}행] [{carNumber}편성] 에어컨이 너무 춥습니다. 현재 객실 내 사람이 없으니 에어컨 온도 및 세기 조절을 부탁드립니다.",
+    "aircon": "{date} {line} [{direction}행] [{carNumber}편성] 에어컨이 너무 춥습니다. 현재 객실 내 사람이 없으니 에어컨 온도 및 세기 조절을 부탁드립니다.",
+    "heating": "{date} {line} [{direction}행] [{carNumber}편성] 난방이 너무 뜨겁습니다. 현재 객실 내 승객들이 불편해하니 난방 조절을 부탁드립니다.",
+    "door": "{date} {line} [{direction}행] [{carNumber}편성] 출입문 고장 신고합니다. 문이 제대로 열리지 않거나 닫히지 않습니다.",
+    "lighting": "{date} {line} [{direction}행] [{carNumber}편성] 조명 고장 신고합니다. 객실 내 조명이 깜빡이거나 꺼져있습니다.",
+    "announcement": "{date} {line} [{direction}행] [{carNumber}편성] 안내방송 고장 신고합니다. 방송이 들리지 않거나 음질이 불량합니다.",
+    "escalator": "{date} {line} 역 에스컬레이터 고장 신고합니다. 현재 운행이 중단되었습니다.",
+    "elevator": "{date} {line} 역 엘리베이터 고장 신고합니다. 현재 사용할 수 없는 상태입니다.",
+    "custom": "{date} {line} [{direction}행] [{carNumber}편성] {message}"
+  },
+  "lastUpdated": "2025-01-23",
+  "version": "1.0.0"
+} 
