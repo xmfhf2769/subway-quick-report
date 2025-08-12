@@ -652,3 +652,175 @@ p, h1, h2, h3, h4, h5, h6 {
     justify-content: center;
   }
 } 
+
+/* ========================================
+   문자 예시 UI 스타일
+======================================== */
+
+.message-preview {
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.preview-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.preview-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.preview-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.preview-header {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.preview-label {
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.preview-time {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.preview-content {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.message-example {
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  word-break: keep-all;
+}
+
+.message-example span {
+  display: inline;
+}
+
+.date-part {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.line-part {
+  color: #dc2626;
+  font-weight: 700;
+  margin: 0 0.25rem;
+}
+
+.editable-part {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-weight: 500;
+  margin: 0 0.15rem;
+  border: 1px solid #fbbf24;
+}
+
+.content-part {
+  color: var(--text-primary);
+  margin-left: 0.25rem;
+}
+
+.preview-footer {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.edit-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-size: 0.85rem;
+}
+
+.edit-icon {
+  font-size: 1rem;
+}
+
+.edit-notice strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .preview-card {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+}
+
+[data-theme="dark"] .preview-content {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+[data-theme="dark"] .message-example {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .editable-part {
+  background: #451a03;
+  color: #fbbf24;
+  border-color: #92400e;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .message-preview {
+    margin: 1.5rem 0;
+    padding: 0 0.5rem;
+  }
+  
+  .preview-title {
+    font-size: 1.1rem;
+  }
+  
+  .preview-card {
+    border-radius: 12px;
+  }
+  
+  .preview-content {
+    padding: 1rem;
+  }
+  
+  .message-example {
+    font-size: 0.9rem;
+  }
+  
+  .edit-notice {
+    font-size: 0.8rem;
+  }
+}
+
+/* ======================================== 

@@ -49,6 +49,26 @@ class SubwayApp {
   }
 
   /**
+   * 문자 예시 미리보기의 시간을 실시간으로 업데이트합니다.
+   */
+  startMessagePreviewUpdater() {
+    const updatePreviewTime = () => {
+      const datePreview = document.getElementById('datePreview');
+      if (datePreview) {
+        const now = new Date();
+        const timeStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        datePreview.textContent = timeStr;
+      }
+    };
+
+    // 즉시 업데이트
+    updatePreviewTime();
+
+    // 1분마다 업데이트
+    setInterval(updatePreviewTime, 60000);
+  }
+
+  /**
    * 데이터를 로드합니다.
    */
   async loadData() {
