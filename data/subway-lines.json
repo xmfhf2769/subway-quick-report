@@ -275,15 +275,15 @@
     }
   },
   "messageTemplates": {
-    "default": "[{line}] 고장 신고합니다.",
-    "aircon": "[{line}] 에어컨 고장 신고합니다.",
-    "heating": "[{line}] 난방 고장 신고합니다.",
-    "door": "[{line}] 출입문 고장 신고합니다.",
-    "lighting": "[{line}] 조명 고장 신고합니다.",
-    "announcement": "[{line}] 안내방송 고장 신고합니다.",
-    "escalator": "[{line}] 에스컬레이터 고장 신고합니다.",
-    "elevator": "[{line}] 엘리베이터 고장 신고합니다.",
-    "custom": "[{line}] {message}"
+    "default": "{date} {line} [{direction}행] [{carNumber}편성] 에어컨이 너무 춥습니다. 현재 객실 내 사람이 없으니 에어컨 온도 및 세기 조절을 부탁드립니다.",
+    "aircon": "{date} {line} [{direction}행] [{carNumber}편성] 에어컨이 너무 춥습니다. 현재 객실 내 사람이 없으니 에어컨 온도 및 세기 조절을 부탁드립니다.",
+    "heating": "{date} {line} [{direction}행] [{carNumber}편성] 난방이 너무 뜨겁습니다. 현재 객실 내 승객들이 불편해하니 난방 조절을 부탁드립니다.",
+    "door": "{date} {line} [{direction}행] [{carNumber}편성] 출입문 고장 신고합니다. 문이 제대로 열리지 않거나 닫히지 않습니다.",
+    "lighting": "{date} {line} [{direction}행] [{carNumber}편성] 조명 고장 신고합니다. 객실 내 조명이 깜빡이거나 꺼져있습니다.",
+    "announcement": "{date} {line} [{direction}행] [{carNumber}편성] 안내방송 고장 신고합니다. 방송이 들리지 않거나 음질이 불량합니다.",
+    "escalator": "{date} {line} 역 에스컬레이터 고장 신고합니다. 현재 운행이 중단되었습니다.",
+    "elevator": "{date} {line} 역 엘리베이터 고장 신고합니다. 현재 사용할 수 없는 상태입니다.",
+    "custom": "{date} {line} [{direction}행] [{carNumber}편성] {message}"
   },
   "lastUpdated": "2025-01-23",
   "version": "1.0.0"

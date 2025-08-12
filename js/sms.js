@@ -57,8 +57,20 @@ class SMSManager {
       template = template.replace('{message}', customMessage);
     }
 
-    // 호선명 치환
-    const message = template.replace('{line}', lineName);
+    // 현재 날짜 및 시각 생성
+    const now = new Date();
+    const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+    // 기본값 설정 (사용자가 나중에 수정 가능)
+    const direction = '[종착역]'; // 예: [강남행], [신도림행] 등
+    const carNumber = '[X]'; // 예: [1], [2], [3] 등
+
+    // 변수 치환
+    const message = template
+      .replace('{date}', dateStr)
+      .replace('{line}', lineName)
+      .replace('{direction}', direction)
+      .replace('{carNumber}', carNumber);
 
     // 메시지 히스토리에 추가
     this.addToHistory({
@@ -325,4 +337,4 @@ document.addEventListener('DOMContentLoaded', () => {
 // 모듈 익스포트 (ES6 모듈 환경에서 사용 시)
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { SMSManager, smsManager };
-} 
+}
