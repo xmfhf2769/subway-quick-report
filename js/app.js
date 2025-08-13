@@ -9,7 +9,6 @@ class SubwayApp {
   constructor() {
     this.currentRegion = 'seoul';
     this.isInitialized = false;
-    this.themeManager = new ThemeManager();
   }
 
   /**
@@ -31,9 +30,6 @@ class SubwayApp {
 
       // 이벤트 리스너 설정
       this.setupEventListeners();
-
-      // 테마 초기화
-      this.themeManager.init();
 
       // 첫 번째 지역 표시
       this.showRegion(this.currentRegion);
@@ -279,12 +275,7 @@ class SubwayApp {
       this.handleKeyNavigation(event);
     });
 
-    // 테마 토글
-    document.addEventListener('click', (event) => {
-      if (event.target.closest('.theme-toggle')) {
-        this.themeManager.toggle();
-      }
-    });
+
 
     // 윈도우 리사이즈
     window.addEventListener('resize', () => {
@@ -433,92 +424,7 @@ class SubwayApp {
   }
 }
 
-/**
- * 테마 관리 클래스
- */
-class ThemeManager {
-  constructor() {
-    this.currentTheme = 'light';
-    this.storageKey = 'subway-theme';
-  }
 
-  /**
-   * 테마 매니저를 초기화합니다.
-   */
-  init() {
-    // 저장된 테마 로드
-    this.loadSavedTheme();
-
-    // 시스템 테마 변경 감지
-    if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!this.hasUserPreference()) {
-          this.setTheme(e.matches ? 'dark' : 'light', false);
-        }
-      });
-    }
-
-    // 테마 아이콘 업데이트
-    this.updateThemeIcon();
-  }
-
-  /**
-   * 저장된 테마를 로드합니다.
-   */
-  loadSavedTheme() {
-    const saved = localStorage.getItem(this.storageKey);
-    if (saved) {
-      this.setTheme(saved, false);
-    } else {
-      // 시스템 선호도 확인
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.setTheme(prefersDark ? 'dark' : 'light', false);
-    }
-  }
-
-  /**
-   * 테마를 설정합니다.
-   */
-  setTheme(theme, save = true) {
-    this.currentTheme = theme;
-    document.documentElement.setAttribute('data-theme', theme);
-
-    if (save) {
-      localStorage.setItem(this.storageKey, theme);
-    }
-
-    this.updateThemeIcon();
-  }
-
-  /**
-   * 테마를 토글합니다.
-   */
-  toggle() {
-    const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-    this.setTheme(newTheme);
-    showSuccess(`${newTheme === 'dark' ? '다크' : '라이트'} 모드로 변경되었습니다.`);
-  }
-
-  /**
-   * 테마 아이콘을 업데이트합니다.
-   */
-  updateThemeIcon() {
-    const toggle = document.getElementById('theme-toggle');
-    if (toggle) {
-      toggle.textContent = this.currentTheme === 'light' ? '🌙' : '☀️';
-      toggle.setAttribute('aria-label',
-        this.currentTheme === 'light' ? '다크 모드로 변경' : '라이트 모드로 변경'
-      );
-    }
-  }
-
-  /**
-   * 사용자가 테마를 설정했는지 확인합니다.
-   */
-  hasUserPreference() {
-    return localStorage.getItem(this.storageKey) !== null;
-  }
-}
 
 // 전역 앱 인스턴스
 const app = new SubwayApp();
@@ -530,5 +436,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 모듈 익스포트 (ES6 모듈 환경에서 사용 시)
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { SubwayApp, ThemeManager, app };
+  module.exports = { SubwayApp, app };
 }
