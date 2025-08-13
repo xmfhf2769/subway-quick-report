@@ -51,7 +51,7 @@ class StationPhoneManager {
    */
   bindElements() {
     this.elements.searchInput = document.getElementById('station-search');
-    this.elements.regionTabs = document.querySelectorAll('.region-tab');
+    this.elements.regionTabs = document.querySelectorAll('.filter-tab');
     this.elements.stationsGrid = document.getElementById('stations-grid');
     this.elements.stationsCount = document.getElementById('stations-count');
     this.elements.loadingStations = document.getElementById('loading-stations');
