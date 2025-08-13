@@ -214,6 +214,7 @@
   color: white;
   flex-shrink: 0;
   transition: all var(--transition-fast);
+  background: var(--text-muted); /* 기본 배경색 */
 }
 
 .station-card:hover .station-line-badge {
