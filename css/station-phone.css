@@ -167,31 +167,29 @@
 }
 
 .station-card {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-color);
+  background: white;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   transition: all var(--transition-normal);
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
 }
 
 .station-card:hover {
-  border-color: var(--primary-color);
+  border-color: var(--border-hover);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
-.station-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: var(--spacing-md);
-}
-
 .station-info {
   flex: 1;
+  min-width: 0; /* flexbox overflow 방지 */
 }
 
 .station-name {
@@ -204,17 +202,47 @@
   gap: var(--spacing-sm);
 }
 
-.station-line {
-  display: inline-flex;
+.station-line-badge {
+  display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  background: var(--bg-secondary);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  color: var(--text-primary);
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
 }
+
+.station-card:hover .station-line-badge {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 호선별 배지 색상 - 메인 페이지와 동일 */
+.station-line-badge[data-line="1호선"] { background: #0052a4; }
+.station-line-badge[data-line="2호선"] { background: #00a84d; }
+.station-line-badge[data-line="3호선"] { background: #ef7c1c; }
+.station-line-badge[data-line="4호선"] { background: #00a4e3; }
+.station-line-badge[data-line="5호선"] { background: #996cac; }
+.station-line-badge[data-line="6호선"] { background: #cd7f00; }
+.station-line-badge[data-line="7호선"] { background: #747f00; }
+.station-line-badge[data-line="8호선"] { background: #e6186c; }
+.station-line-badge[data-line="9호선"] { background: #bdb092; }
+
+/* 부산지하철 */
+.station-line-badge[data-line="부산1호선"] { background: #f06a00; }
+.station-line-badge[data-line="부산2호선"] { background: #81c562; }
+.station-line-badge[data-line="부산3호선"] { background: #fabe00; }
+.station-line-badge[data-line="부산4호선"] { background: #1e90ff; }
+
+/* 기타 지역 */
+.station-line-badge[data-line*="대전"] { background: #007448; }
+.station-line-badge[data-line*="대구"] { background: #d93f00; }
+.station-line-badge[data-line*="광주"] { background: #009639; }
+.station-line-badge[data-line*="인천"] { background: #759cce; }
 
 .station-address {
   font-size: var(--font-size-sm);
@@ -233,43 +261,39 @@
   gap: var(--spacing-sm);
 }
 
-.phone-actions {
+.station-actions {
   display: flex;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-md);
+  gap: var(--spacing-xs);
+  align-items: center;
 }
 
-.phone-action {
-  flex: 1;
+.action-btn {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
   cursor: pointer;
   transition: all var(--transition-fast);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xs);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: 500;
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 
-.phone-action:hover {
+.action-btn:hover {
   background: var(--primary-color);
   color: white;
   border-color: var(--primary-color);
 }
 
-.phone-action.call {
+.call-btn:hover {
   background: var(--success-color);
-  color: white;
   border-color: var(--success-color);
 }
 
-.phone-action.call:hover {
-  background: #059669;
+.copy-btn:hover {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
 }
 
 /* ===== 검색 결과 없음 ===== */

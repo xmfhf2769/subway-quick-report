@@ -1,6 +1,8 @@
 /**
  * 역별 전화번호 페이지 관리 클래스
  */
+/* global StationData, showSuccess, showError */
+
 class StationPhoneManager {
   constructor() {
     this.searchQuery = '';
@@ -27,16 +29,16 @@ class StationPhoneManager {
     try {
       // DOM 요소 가져오기
       this.bindElements();
-      
+
       // 데이터 로드
       await this.loadStations();
-      
+
       // 이벤트 리스너 설정
       this.setupEventListeners();
-      
+
       // 초기 화면 렌더링
       this.renderStations();
-      
+
       console.log('Station Phone Manager 초기화 완료');
     } catch (error) {
       console.error('Station Phone Manager 초기화 실패:', error);
@@ -86,7 +88,7 @@ class StationPhoneManager {
   async loadStations() {
     try {
       this.showLoading(true);
-      
+
       // StationData에서 역 정보 가져오기
       if (typeof StationData !== 'undefined' && StationData.stations) {
         this.stations = StationData.stations;
@@ -94,7 +96,7 @@ class StationPhoneManager {
       } else {
         throw new Error('역 데이터를 찾을 수 없습니다.');
       }
-      
+
       this.showLoading(false);
     } catch (error) {
       console.error('역 데이터 로드 실패:', error);
@@ -108,12 +110,12 @@ class StationPhoneManager {
    */
   handleSearchInput(query) {
     this.searchQuery = query.trim();
-    
+
     // 기존 타이머 취소
     if (this.searchDebounceTimer) {
       clearTimeout(this.searchDebounceTimer);
     }
-    
+
     // 300ms 후 검색 실행
     this.searchDebounceTimer = setTimeout(() => {
       this.filterStations();
@@ -126,12 +128,12 @@ class StationPhoneManager {
    */
   handleRegionChange(region) {
     this.selectedRegion = region;
-    
+
     // 탭 활성화 상태 업데이트
     this.elements.regionTabs.forEach(tab => {
       tab.classList.toggle('active', tab.dataset.region === region);
     });
-    
+
     this.filterStations();
     this.renderStations();
   }
@@ -141,22 +143,22 @@ class StationPhoneManager {
    */
   filterStations() {
     let filtered = [...this.stations];
-    
+
     // 지역 필터링
     if (this.selectedRegion !== 'all') {
       filtered = filtered.filter(station => station.region === this.selectedRegion);
     }
-    
+
     // 검색어 필터링
     if (this.searchQuery) {
       const query = this.searchQuery.toLowerCase();
-      filtered = filtered.filter(station => 
+      filtered = filtered.filter(station =>
         station.name.toLowerCase().includes(query) ||
         station.line.toLowerCase().includes(query) ||
         station.address.toLowerCase().includes(query)
       );
     }
-    
+
     this.filteredStations = filtered;
   }
 
@@ -164,29 +166,31 @@ class StationPhoneManager {
    * 역 목록 렌더링
    */
   renderStations() {
-    if (!this.elements.stationsGrid) return;
-    
+    if (!this.elements.stationsGrid) {
+      return;
+    }
+
     // 카운트 업데이트
     if (this.elements.stationsCount) {
       this.elements.stationsCount.textContent = this.filteredStations.length;
     }
-    
+
     // 결과가 없는 경우
     if (this.filteredStations.length === 0) {
       this.showNoResults(true);
       this.elements.stationsGrid.innerHTML = '';
       return;
     }
-    
+
     this.showNoResults(false);
-    
+
     // 역 카드 생성
-    const stationCards = this.filteredStations.map(station => 
+    const stationCards = this.filteredStations.map(station =>
       this.createStationCard(station)
     ).join('');
-    
+
     this.elements.stationsGrid.innerHTML = stationCards;
-    
+
     // 버튼 이벤트 리스너 추가
     this.attachStationCardEvents();
   }
@@ -195,15 +199,15 @@ class StationPhoneManager {
    * 역 카드 생성
    */
   createStationCard(station) {
+    // 호선에서 숫자만 추출
+    const lineNumber = this.extractLineNumber(station.line);
+
     return `
       <div class="station-card" data-station-id="${station.id}">
         <div class="station-info">
           <h3 class="station-name">${station.name}</h3>
-          <div class="station-details">
-            <span class="station-line">${station.line}</span>
-            <span class="station-phone">${station.phone}</span>
-          </div>
           <div class="station-address">${station.address}</div>
+          <div class="station-phone">${station.phone}</div>
         </div>
         <div class="station-actions">
           <button class="action-btn call-btn" data-action="call" data-phone="${station.phone}">
@@ -216,8 +220,72 @@ class StationPhoneManager {
             📋 복사
           </button>
         </div>
+        <div class="station-line-badge" data-line="${station.line}">
+          ${lineNumber}
+        </div>
       </div>
     `;
+  }
+
+  /**
+   * 호선에서 표시할 숫자/텍스트 추출
+   */
+  extractLineNumber(line) {
+    if (line.includes('1호선')) {
+      return '1';
+    }
+    if (line.includes('2호선')) {
+      return '2';
+    }
+    if (line.includes('3호선')) {
+      return '3';
+    }
+    if (line.includes('4호선')) {
+      return '4';
+    }
+    if (line.includes('5호선')) {
+      return '5';
+    }
+    if (line.includes('6호선')) {
+      return '6';
+    }
+    if (line.includes('7호선')) {
+      return '7';
+    }
+    if (line.includes('8호선')) {
+      return '8';
+    }
+    if (line.includes('9호선')) {
+      return '9';
+    }
+    if (line.includes('공항')) {
+      return '공항';
+    }
+    if (line.includes('분당')) {
+      return '분당';
+    }
+    if (line.includes('경의')) {
+      return '경의';
+    }
+    if (line.includes('우이')) {
+      return '우이';
+    }
+    if (line.includes('수인')) {
+      return '수인';
+    }
+    if (line.includes('대전')) {
+      return '대전';
+    }
+    if (line.includes('대구')) {
+      return '대구';
+    }
+    if (line.includes('광주')) {
+      return '광주';
+    }
+    if (line.includes('인천')) {
+      return '인천';
+    }
+    return line.charAt(0); // 기본값으로 첫 글자
   }
 
   /**
@@ -225,13 +293,13 @@ class StationPhoneManager {
    */
   attachStationCardEvents() {
     const actionButtons = document.querySelectorAll('.action-btn');
-    
+
     actionButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
         const action = button.dataset.action;
         const phone = button.dataset.phone;
-        
+
         this.handleStationAction(action, phone);
       });
     });
@@ -298,7 +366,7 @@ class StationPhoneManager {
         document.execCommand('copy');
         document.body.removeChild(textArea);
       }
-      
+
       showSuccess(`전화번호 ${phone}가 복사되었습니다.`);
     } catch (error) {
       console.error('복사 실패:', error);
@@ -316,7 +384,7 @@ class StationPhoneManager {
       this.handleSearchInput('');
       this.elements.searchInput.blur();
     }
-    
+
     // Enter로 첫 번째 결과 전화 걸기
     if (event.key === 'Enter' && this.filteredStations.length > 0) {
       const firstStation = this.filteredStations[0];
@@ -331,7 +399,7 @@ class StationPhoneManager {
     if (this.elements.loadingStations) {
       this.elements.loadingStations.style.display = isLoading ? 'block' : 'none';
     }
-    
+
     if (this.elements.stationsGrid) {
       this.elements.stationsGrid.style.display = isLoading ? 'none' : 'grid';
     }
