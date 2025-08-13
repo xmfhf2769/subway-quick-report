@@ -205,6 +205,20 @@ class SubwayApp {
     // 접근성을 위한 키보드 지원
     button.setAttribute('tabindex', '0');
 
+    // 호선 번호 추출 (특수 노선 처리)
+    let displayNumber = lineId;
+    if (lineId === 'airport') {
+      displayNumber = '공항';
+    } else if (lineId === 'bundang') {
+      displayNumber = '분당';
+    } else if (lineId === 'gyeongui') {
+      displayNumber = '경의';
+    } else if (lineId === 'uisinseol') {
+      displayNumber = '우이';
+    } else if (lineId === 'suinbundang') {
+      displayNumber = '수인';
+    }
+
     button.innerHTML = `
       <div class="line-info">
         <div class="line-number">
@@ -214,8 +228,8 @@ class SubwayApp {
         <div class="line-operator">${lineData.operator}</div>
         <div class="line-phone">${lineData.phone}</div>
       </div>
-      <div class="line-action">
-        ✉️
+      <div class="line-badge">
+        ${displayNumber}
       </div>
     `;
 

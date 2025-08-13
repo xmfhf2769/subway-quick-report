@@ -89,8 +89,8 @@
 
 /* ===== 호선 버튼 ===== */
 .line-btn {
-  background: transparent;
-  border: 2px solid var(--border-color);
+  background: white;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   cursor: pointer;
@@ -98,17 +98,18 @@
   text-align: left;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-md);
   width: 100%;
   font-size: var(--font-size-base);
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
-  color: white !important;
+  color: var(--text-primary) !important;
 }
 
 .line-btn:hover {
-  border-color: var(--primary-color);
+  border-color: var(--border-hover);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
@@ -123,128 +124,69 @@
   outline-offset: 2px;
 }
 
-/* 호선별 색상 - 순수한 공식 색상 (그라데이션 없음) */
-.line-btn[data-line="1"] { 
-  background: #0052a4 !important;
-  border: 2px solid #0052a4 !important;
-}
-.line-btn[data-line="2"] { 
-  background: #00a84d !important;
-  border: 2px solid #00a84d !important;
-}
-.line-btn[data-line="3"] { 
-  background: #ef7c1c !important;
-  border: 2px solid #ef7c1c !important;
-}
-.line-btn[data-line="4"] { 
-  background: #00a4e3 !important;
-  border: 2px solid #00a4e3 !important;
-}
-.line-btn[data-line="5"] { 
-  background: #996cac !important;
-  border: 2px solid #996cac !important;
-}
-.line-btn[data-line="6"] { 
-  background: #cd7f00 !important;
-  border: 2px solid #cd7f00 !important;
-}
-.line-btn[data-line="7"] { 
-  background: #747f00 !important;
-  border: 2px solid #747f00 !important;
-}
-.line-btn[data-line="8"] { 
-  background: #e6186c !important;
-  border: 2px solid #e6186c !important;
-}
-.line-btn[data-line="9"] { 
-  background: #bdb092 !important;
-  border: 2px solid #bdb092 !important;
+/* 호선별 원형 숫자 배지 색상 */
+.line-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
 }
 
-/* 부산지하철 색상 - 순수한 공식 색상 */
-.line-btn[data-region="busan"][data-line="1"] { 
-  background: #f06a00 !important;
-  border: 2px solid #f06a00 !important;
-}
-.line-btn[data-region="busan"][data-line="2"] { 
-  background: #81c562 !important;
-  border: 2px solid #81c562 !important;
-}
-.line-btn[data-region="busan"][data-line="3"] { 
-  background: #fabe00 !important;
-  border: 2px solid #fabe00 !important;
-}
-.line-btn[data-region="busan"][data-line="4"] { 
-  background: #1e90ff !important;
-  border: 2px solid #1e90ff !important;
-}
+/* 서울 지하철 */
+.line-btn[data-line="1"] .line-badge { background: #0052a4; }
+.line-btn[data-line="2"] .line-badge { background: #00a84d; }
+.line-btn[data-line="3"] .line-badge { background: #ef7c1c; }
+.line-btn[data-line="4"] .line-badge { background: #00a4e3; }
+.line-btn[data-line="5"] .line-badge { background: #996cac; }
+.line-btn[data-line="6"] .line-badge { background: #cd7f00; }
+.line-btn[data-line="7"] .line-badge { background: #747f00; }
+.line-btn[data-line="8"] .line-badge { background: #e6186c; }
+.line-btn[data-line="9"] .line-badge { background: #bdb092; }
 
-/* 서울 특수 노선 색상 - 순수한 공식 색상 */
-.line-btn[data-line="airport"] { 
-  background: #0090d2 !important;
-  border: 2px solid #0090d2 !important;
-}
-.line-btn[data-line="bundang"] { 
-  background: #d4003b !important;
-  border: 2px solid #d4003b !important;
-}
-.line-btn[data-line="gyeongui"] { 
-  background: #77c4a3 !important;
-  border: 2px solid #77c4a3 !important;
-}
-.line-btn[data-line="uisinseol"] { 
-  background: #b0ce18 !important;
-  border: 2px solid #b0ce18 !important;
-}
-.line-btn[data-line="suinbundang"] { 
-  background: #fabe00 !important;
-  border: 2px solid #fabe00 !important;
-}
+/* 부산지하철 */
+.line-btn[data-region="busan"][data-line="1"] .line-badge { background: #f06a00; }
+.line-btn[data-region="busan"][data-line="2"] .line-badge { background: #81c562; }
+.line-btn[data-region="busan"][data-line="3"] .line-badge { background: #fabe00; }
+.line-btn[data-region="busan"][data-line="4"] .line-badge { background: #1e90ff; }
 
-/* 대전지하철 색상 - 순수한 공식 색상 */
-.line-btn[data-region="daejeon"][data-line="1"] { 
-  background: #007448 !important;
-  border: 2px solid #007448 !important;
-}
+/* 서울 특수 노선 */
+.line-btn[data-line="airport"] .line-badge { background: #0090d2; }
+.line-btn[data-line="bundang"] .line-badge { background: #d4003b; }
+.line-btn[data-line="gyeongui"] .line-badge { background: #77c4a3; }
+.line-btn[data-line="uisinseol"] .line-badge { background: #b0ce18; }
+.line-btn[data-line="suinbundang"] .line-badge { background: #fabe00; }
 
-/* 대구지하철 색상 - 순수한 공식 색상 */
-.line-btn[data-region="daegu"][data-line="1"] { 
-  background: #d93f00 !important;
-  border: 2px solid #d93f00 !important;
-}
-.line-btn[data-region="daegu"][data-line="2"] { 
-  background: #00a84d !important;
-  border: 2px solid #00a84d !important;
-}
-.line-btn[data-region="daegu"][data-line="3"] { 
-  background: #ffb100 !important;
-  border: 2px solid #ffb100 !important;
-}
+/* 대전지하철 */
+.line-btn[data-region="daejeon"][data-line="1"] .line-badge { background: #007448; }
 
-/* 광주지하철 색상 - 순수한 공식 색상 */
-.line-btn[data-region="gwangju"][data-line="1"] { 
-  background: #009639 !important;
-  border: 2px solid #009639 !important;
-}
+/* 대구지하철 */
+.line-btn[data-region="daegu"][data-line="1"] .line-badge { background: #d93f00; }
+.line-btn[data-region="daegu"][data-line="2"] .line-badge { background: #00a84d; }
+.line-btn[data-region="daegu"][data-line="3"] .line-badge { background: #ffb100; }
 
-/* 인천지하철 색상 - 순수한 공식 색상 */
-.line-btn[data-region="incheon"][data-line="1"] { 
-  background: #759cce !important;
-  border: 2px solid #759cce !important;
-}
-.line-btn[data-region="incheon"][data-line="2"] { 
-  background: #f5a251 !important;
-  border: 2px solid #f5a251 !important;
-}
+/* 광주지하철 */
+.line-btn[data-region="gwangju"][data-line="1"] .line-badge { background: #009639; }
+
+/* 인천지하철 */
+.line-btn[data-region="incheon"][data-line="1"] .line-badge { background: #759cce; }
+.line-btn[data-region="incheon"][data-line="2"] .line-badge { background: #f5a251; }
 
 .line-info {
   flex: 1;
+  min-width: 0; /* flexbox overflow 방지 */
 }
 
 .line-number {
   font-size: var(--font-size-xl);
   font-weight: 700;
-  color: white !important;
+  color: var(--text-primary) !important;
   margin-bottom: var(--spacing-xs);
   display: flex;
   align-items: center;
@@ -257,34 +199,19 @@
 
 .line-operator {
   font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: var(--text-secondary) !important;
   margin-bottom: var(--spacing-xs);
 }
 
 .line-phone {
   font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--text-muted) !important;
   font-family: 'Courier New', monospace;
 }
 
-.line-action {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  font-size: var(--font-size-lg);
-  color: var(--text-primary);
-  transition: all var(--transition-fast);
-}
-
-.line-btn:hover .line-action {
-  background-color: rgba(255, 255, 255, 0.3);
-  color: var(--text-primary);
-  transform: scale(1.1);
+.line-btn:hover .line-badge {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ===== 빈 상태 ===== */
