@@ -533,92 +533,7 @@ p, h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
-/* ===== 광고 배너 ===== */
-.ad-banner-section {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  padding: var(--spacing-sm) 0;
-}
 
-.ad-banner {
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.ad-placeholder {
-  background: linear-gradient(135deg, var(--bg-primary), var(--bg-tertiary));
-  border: 2px dashed var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  text-align: center;
-  transition: all var(--transition-fast);
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ad-placeholder:hover {
-  border-color: var(--primary-color);
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-}
-
-.ad-content {
-  max-width: 600px;
-}
-
-.ad-label {
-  display: inline-block;
-  background: var(--secondary-color);
-  color: white;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: var(--spacing-sm);
-}
-
-.ad-text {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: var(--spacing-sm) 0;
-  line-height: 1.4;
-}
-
-.ad-note {
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-/* 실제 광고가 로드되었을 때 스타일 */
-.ad-banner.loaded .ad-placeholder {
-  border: none;
-  background: transparent;
-  padding: 0;
-}
-
-.ad-banner.loaded .ad-content {
-  max-width: none;
-}
-
-/* 광고 반응형 */
-@media (max-width: 768px) {
-  .ad-banner-section {
-    padding: var(--spacing-xs) 0;
-  }
-  
-  .ad-placeholder {
-    padding: var(--spacing-md);
-    min-height: 100px;
-  }
-  
-  .ad-text {
-    font-size: var(--font-size-base);
-  }
-}
 
 @media (max-width: 480px) {
   .ad-placeholder {
@@ -633,7 +548,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /* ===== 인쇄 스타일 ===== */
 @media print {
-  .header, .footer, .theme-toggle, .device-notice, .ad-banner-section {
+  .header, .footer, .theme-toggle, .device-notice {
     display: none;
   }
   
