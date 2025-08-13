@@ -466,6 +466,29 @@ p, h1, h2, h3, h4, h5, h6 {
   font-style: italic;
 }
 
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.footer-link:hover {
+  color: var(--primary-hover);
+  background-color: var(--bg-tertiary);
+  text-decoration: underline;
+}
+
 /* ===== 로딩 인디케이터 ===== */
 .loading {
   position: fixed;

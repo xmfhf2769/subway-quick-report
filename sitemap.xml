@@ -6,18 +6,26 @@
   
   <!-- 메인 페이지 -->
   <url>
-    <loc>https://subway-report.com/</loc>
-    <lastmod>2024-01-15</lastmod>
+    <loc>https://subway-report.co.kr/</loc>
+    <lastmod>2025-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- 역별 전화번호 페이지 -->
   <url>
-    <loc>https://subway-report.com/station-phone.html</loc>
-    <lastmod>2024-01-15</lastmod>
+    <loc>https://subway-report.co.kr/station-phone.html</loc>
+    <lastmod>2025-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  
+  <!-- 개인정보처리방침 페이지 -->
+  <url>
+    <loc>https://subway-report.co.kr/privacy-policy.html</loc>
+    <lastmod>2025-01-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   
 </urlset> 
