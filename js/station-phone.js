@@ -200,7 +200,7 @@ class StationPhoneManager {
    */
   createStationCard(station) {
     // 호선에서 숫자만 추출
-    const lineNumber = this.extractLineNumber(station.line);
+    const lineNumber = station.line;
 
     return `
       <div class="station-card" data-station-id="${station.id}">
@@ -220,7 +220,7 @@ class StationPhoneManager {
             📋 복사
           </button>
         </div>
-        <div class="station-line-badge" data-line="${station.line}">
+        <div class="station-line-badge" data-line="${station.line}" data-region="${station.region}">
           ${lineNumber}
         </div>
       </div>

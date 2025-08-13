@@ -221,28 +221,28 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 호선별 배지 색상 - 메인 페이지와 동일 */
-.station-line-badge[data-line="1호선"] { background: #0052a4; }
-.station-line-badge[data-line="2호선"] { background: #00a84d; }
-.station-line-badge[data-line="3호선"] { background: #ef7c1c; }
-.station-line-badge[data-line="4호선"] { background: #00a4e3; }
-.station-line-badge[data-line="5호선"] { background: #996cac; }
-.station-line-badge[data-line="6호선"] { background: #cd7f00; }
-.station-line-badge[data-line="7호선"] { background: #747f00; }
-.station-line-badge[data-line="8호선"] { background: #e6186c; }
-.station-line-badge[data-line="9호선"] { background: #bdb092; }
+/* 호선별 배지 색상 - 실제 데이터 형식에 맞게 수정 */
+.station-line-badge[data-line="1"] { background: #0052a4; }
+.station-line-badge[data-line="2"] { background: #00a84d; }
+.station-line-badge[data-line="3"] { background: #ef7c1c; }
+.station-line-badge[data-line="4"] { background: #00a4e3; }
+.station-line-badge[data-line="5"] { background: #996cac; }
+.station-line-badge[data-line="6"] { background: #cd7f00; }
+.station-line-badge[data-line="7"] { background: #747f00; }
+.station-line-badge[data-line="8"] { background: #e6186c; }
+.station-line-badge[data-line="9"] { background: #bdb092; }
 
-/* 부산지하철 */
-.station-line-badge[data-line="부산1호선"] { background: #f06a00; }
-.station-line-badge[data-line="부산2호선"] { background: #81c562; }
-.station-line-badge[data-line="부산3호선"] { background: #fabe00; }
-.station-line-badge[data-line="부산4호선"] { background: #1e90ff; }
+/* 부산지하철 - region과 line 조합으로 더 정확한 선택 */
+.station-line-badge[data-region="busan"][data-line="1"] { background: #f06a00; }
+.station-line-badge[data-region="busan"][data-line="2"] { background: #81c562; }
+.station-line-badge[data-region="busan"][data-line="3"] { background: #fabe00; }
+.station-line-badge[data-region="busan"][data-line="4"] { background: #1e90ff; }
 
-/* 기타 지역 */
-.station-line-badge[data-line*="대전"] { background: #007448; }
-.station-line-badge[data-line*="대구"] { background: #d93f00; }
-.station-line-badge[data-line*="광주"] { background: #009639; }
-.station-line-badge[data-line*="인천"] { background: #759cce; }
+/* 기타 지역별 */
+.station-line-badge[data-region="daejeon"] { background: #007448; }
+.station-line-badge[data-region="daegu"] { background: #d93f00; }
+.station-line-badge[data-region="gwangju"] { background: #009639; }
+.station-line-badge[data-region="incheon"] { background: #759cce; }
 
 .station-address {
   font-size: var(--font-size-sm);
@@ -256,9 +256,9 @@
   font-weight: 600;
   color: var(--primary-color);
   font-family: 'Courier New', monospace;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .station-actions {
