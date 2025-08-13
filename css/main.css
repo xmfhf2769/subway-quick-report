@@ -172,7 +172,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .header-title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-base);
   font-weight: 700;
   margin: 0;
   line-height: 1.2;
@@ -194,7 +194,7 @@ p, h1, h2, h3, h4, h5, h6 {
   color: white;
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-sm);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
@@ -215,7 +215,7 @@ p, h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
   font-weight: 500;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   line-height: 1;
   white-space: nowrap;
   display: flex;
@@ -301,12 +301,12 @@ p, h1, h2, h3, h4, h5, h6 {
   }
 
   .header-title {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     line-height: 1.2;
   }
 
   .header-subtitle {
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-base);
     padding: calc(var(--spacing-xs) / 2) var(--spacing-xs);
   }
 
@@ -320,7 +320,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
   .nav-link {
     padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-base);
     min-height: 32px;
   }
 
