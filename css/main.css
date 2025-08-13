@@ -280,17 +280,17 @@ p, h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 
-  /* ===== 모바일 헤더 최적화 ===== */
+  /* ===== 모바일 헤더 통일 ===== */
   .header {
-    padding: var(--spacing-md) 0;
-    min-height: 60px;
+    padding: var(--spacing-lg) 0;
+    min-height: 80px;
   }
 
   .header-content {
     flex-direction: column;
     gap: var(--spacing-md);
     align-items: flex-start;
-    min-height: auto;
+    min-height: 48px;
   }
 
   .header-left {
@@ -321,7 +321,7 @@ p, h1, h2, h3, h4, h5, h6 {
   .nav-link {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-base);
-    min-height: 32px;
+    min-height: 36px;
   }
 
 
